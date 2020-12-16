@@ -20,6 +20,7 @@
   - [Centos](#centos---source)
   - [Amazon Linux](#amazon-linux---source)
   - [Alpine](#alpine---source)
+  - [Arch](#arch---source)
 * [Older Instructions](#older-instructions)
 
 ## Kernel Configuration
@@ -387,7 +388,7 @@ sudo apt-get -y install bison build-essential cmake flex git libedit-dev \
 
 # For Eoan (19.10) or Focal (20.04.1 LTS)
 sudo apt install -y bison build-essential cmake flex git libedit-dev \
-  libllvm7 llvm-7-dev libclang-7-dev python zlib1g-dev libelf-dev
+  libllvm7 llvm-7-dev libclang-7-dev python zlib1g-dev libelf-dev libfl-dev
 
 # For other versions
 sudo apt-get -y install bison build-essential cmake flex git libedit-dev \
@@ -651,6 +652,30 @@ ln -s $(which python3) /usr/bin/python
 
 ```
 sudo /usr/share/bcc/tools/execsnoop
+```
+
+## Arch - Source
+
+### Install dependencies
+
+```
+pacman -S cmake clang llvm flex bison python
+```
+
+### Build bcc
+
+```
+git clone https://github.com/iovisor/bcc.git
+pushd .
+mkdir bcc/build
+cd bcc/build
+cmake .. -DPYTHON_CMD=python3 # for python3 support
+make -j$(nproc)
+sudo make install
+cd src/python
+make -j$(nproc)
+sudo make install
+popd
 ```
 
 # Older Instructions

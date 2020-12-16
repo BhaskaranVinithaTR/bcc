@@ -81,6 +81,8 @@ BPF cgroup sysctl | 5.2 | [`7b146cebe30c`](https://github.com/torvalds/linux/com
 BPF raw tracepoint writable | 5.2 | [`9df1c28bb752`](https://github.com/torvalds/linux/commit/9df1c28bb75217b244257152ab7d788bb2a386d0)
 BPF trampoline | 5.5 | [`fec56f5890d9`](https://github.com/torvalds/linux/commit/fec56f5890d93fc2ed74166c397dc186b1c25951)
 BPF LSM hook | 5.7 | [`fc611f47f218`](https://github.com/torvalds/linux/commit/fc611f47f2188ade2b48ff6902d5cce8baac0c58) [`641cd7b06c91`](https://github.com/torvalds/linux/commit/641cd7b06c911c5935c34f24850ea18690649917)
+BPF socket lookup hook | 5.9 | [`e9ddbb7707ff`](https://github.com/torvalds/linux/commit/e9ddbb7707ff5891616240026062b8c1e29864ca)
+Pass map values to map helpers | 4.18 | [`d71962f3e627`](https://github.com/torvalds/linux/commit/d71962f3e627b5941804036755c844fabfb65ff5)
 
 ## Tables (_a.k.a._ Maps)
 
@@ -184,6 +186,7 @@ Solarflare `sfc` driver | 5.5 | [`eb9a36be7f3e`](https://git.kernel.org/cgit/lin
 Marvell `mvneta` driver | 5.5 | [`0db51da7a8e9`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=0db51da7a8e99f0803ec3a8e25c1a66234a219cb)
 Microsoft `hv_netvsc` driver | 5.6 | [`351e1581395f`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=351e1581395fcc7fb952bbd7dda01238f69968fd)
 Amazon `ena` driver | 5.6 | [`838c93dc5449`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=838c93dc5449e5d6378bae117b0a65a122cf7361)
+Intel `igb` driver | 5.10 | [`9cbc948b5a20`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=9cbc948b5a20c9c054d9631099c0426c16da546b)
 Intel `e1000` driver | | [Not upstream yet](https://git.kernel.org/pub/scm/linux/kernel/git/ast/bpf.git/commit/?h=xdp&id=0afee87cfc800bf3317f4dc8847e6f36539b820c)
 Intel `e1000e` driver | | [Not planned for upstream at this time](https://github.com/adjavon/e1000e_xdp)
 
@@ -199,6 +202,8 @@ Alphabetical order
 Helper | Kernel version | License | Commit |
 -------|----------------|---------|--------|
 `BPF_FUNC_bind()` | 4.17 |  | [`d74bad4e74ee`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=d74bad4e74ee373787a9ae24197c17b7cdc428d5) |
+`BPF_FUNC_bpf_per_cpu_ptr()` | 5.10 |  | [`eaa6bcb71ef6`](https://github.com/torvalds/linux/commit/eaa6bcb71ef6ed3dc18fc525ee7e293b06b4882b) |
+`BPF_FUNC_bpf_this_cpu_ptr()` | 5.10 |  | [`63d9b80dcf2c`](https://github.com/torvalds/linux/commit/63d9b80dcf2c67bc5ade61cbbaa09d7af21f43f1) |
 `BPF_FUNC_clone_redirect()` | 4.2 |  | [`3896d655f4d4`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=3896d655f4d491c67d669a15f275a39f713410f8)
 `BPF_FUNC_copy_from_user()` | 5.10 |  | [`07be4c4a3e7a`](https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/commit?id=07be4c4a3e7a0db148e44b16c5190e753d1c8569)
 `BPF_FUNC_csum_diff()` | 4.6 |  | [`7d672345ed29`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=7d672345ed295b1356a5d9f7111da1d1d7d65867)
@@ -272,6 +277,7 @@ Helper | Kernel version | License | Commit |
 `BPF_FUNC_redirect()` | 4.4 |  | [`27b29f63058d`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=27b29f63058d26c6c1742f1993338280d5a41dc6)
 `BPF_FUNC_redirect_map()` | 4.14 |  | [`97f91a7cf04f`](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=97f91a7cf04ff605845c20948b8a80e54cbd3376)
 `BPF_FUNC_redirect_neigh()` | 5.10 |  | [`b4ab31414970`](https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/commit/?id=b4ab31414970a7a03a5d55d75083f2c101a30592)
+`BPF_FUNC_redirect_peer()` | 5.10 |  | [`9aa1206e8f48`](https://github.com/torvalds/linux/commit/9aa1206e8f48222f35a0c809f33b2f4aaa1e2661)
 `BPF_FUNC_reserve_hdr_opt()` | 5.10 |  | [`0813a841566f`](https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/commit?id=0813a841566f0962a5551be7749b43c45f0022a0)
 `BPF_FUNC_ringbuf_discard()` | 5.8 |  | [`457f44363a88`](https://github.com/torvalds/linux/commit/457f44363a8894135c85b7a9afd2bd8196db24ab)
 `BPF_FUNC_ringbuf_output()` | 5.8 |  | [`457f44363a88`](https://github.com/torvalds/linux/commit/457f44363a8894135c85b7a9afd2bd8196db24ab)
