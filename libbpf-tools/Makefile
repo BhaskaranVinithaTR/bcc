@@ -7,18 +7,15 @@ LIBBPF_SRC := $(abspath ../src/cc/libbpf/src)
 LIBBPF_OBJ := $(abspath $(OUTPUT)/libbpf.a)
 INCLUDES := -I$(OUTPUT)
 CFLAGS := -g -O2 -Wall
-ARCH := $(shell uname -m | sed 's/x86_64/x86/')
+ARCH := $(shell uname -m | sed 's/x86_64/x86/g; s/aarch64/arm64/g')
+$(info    ARCH value is $(ARCH))
 
 APPS = \
 	biolatency \
 	biopattern \
-	biosnoop \
-	biostacks \
 	bitesize \
-	cpudist \
 	drsnoop \
 	execsnoop \
-	filelife \
 	hardirqs \
 	llcstat \
 	numamove \
@@ -29,10 +26,7 @@ APPS = \
 	runqslower \
 	softirqs \
 	syscount \
-	tcpconnect \
-	tcpconnlat \
 	vfsstat \
-	xfsslower \
 	#
 
 COMMON_OBJ = \
@@ -79,7 +73,7 @@ $(OUTPUT)/%.skel.h: $(OUTPUT)/%.bpf.o | $(OUTPUT)
 
 $(OUTPUT)/%.bpf.o: %.bpf.c $(LIBBPF_OBJ) $(wildcard %.h) vmlinux.h | $(OUTPUT)
 	$(call msg,BPF,$@)
-	$(Q)$(CLANG) -g -O2 -target bpf -D__TARGET_ARCH_$(ARCH)		      \
+	$(Q)$(CLANG) -g -O2 -target bpf -D__TARGET_ARCH_$(ARCH)	-fmacro-backtrace-limit=0	      \
 		     $(INCLUDES) -c $(filter %.c,$^) -o $@ &&		      \
 	$(LLVM_STRIP) -g $@
 
@@ -95,4 +89,9 @@ $(LIBBPF_OBJ): $(wildcard $(LIBBPF_SRC)/*.[ch]) | $(OUTPUT)/libbpf
 .DELETE_ON_ERROR:
 # keep intermediate (.skel.h, .bpf.o, etc) targets
 .SECONDARY:
+
+
+
+# 	biosnoop \
+# 	biostacks \
 
